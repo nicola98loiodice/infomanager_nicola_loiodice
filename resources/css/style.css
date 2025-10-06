@@ -1,0 +1,19 @@
+:root {
+  --bg-blu: #246D9B;
+  --bg-yellow: #FFAB10;
+  --white: #f8f9fa;
+  --text-color: #212529;
+}
+
+.bg-blu{
+  background-color: var(--bg-blu);
+}
+.bg-yellow{
+  background-color: var(--bg-yellow);
+}
+.tx-white{
+  color: var(--white);
+}
+.height-custom{
+  min-height: 60vh;
+}
