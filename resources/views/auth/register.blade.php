@@ -16,6 +16,10 @@
                         <input type="text" class="form-control" id="name" name="name">
                     </div>
                     <div class="mb-3">
+                        <label for="surname" class="form-label">Cognome:</label>
+                        <input type="text" class="form-control" id="surname" name="surname">
+                    </div>
+                    <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Indirizzo Email</label>
                         <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" name="email">
                     </div>
