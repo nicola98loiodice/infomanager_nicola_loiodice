@@ -123,4 +123,11 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'office' =>[
+        'lat' => 41.15141994689981,       // Latitudine della sede
+        'lng' => 16.418997251513673,        // Longitudine della sede
+        'max_distance_m' => 100,  // Raggio massimo in metri
+        
+    ]
+
 ];

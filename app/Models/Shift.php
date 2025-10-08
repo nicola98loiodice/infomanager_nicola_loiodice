@@ -16,6 +16,9 @@ class Shift extends Model
         'surname',
         'date',
         'minutes',
+        'shift_type',
+        'latitude',
+        'longitude',
     ];
 
     public function user(){

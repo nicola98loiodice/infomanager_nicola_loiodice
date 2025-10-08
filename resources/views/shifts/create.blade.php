@@ -1,7 +1,9 @@
 <x-layout>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+    <div class="container  mw-100">
+        
+        <div class="row justify-content-between flex-row">
+            <x-sidebar />
+            <div class="col-md-10 mt-2">
                 <h2 class="mb-4 text-center">Firma Turno</h2>
 
                 {{-- Messaggi di stato --}}
@@ -25,7 +27,7 @@
                 @endif
 
                 {{-- FORM --}}
-                <form method="POST" action="{{ route('shifts.store') }}" class="p-4 shadow rounded bg-yellow">
+                <form method="POST" action="{{ route('shifts.store') }}" class="p-4 rounded ">
                     @csrf
 
                     <div class="mb-3">
@@ -58,10 +60,31 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Fascia oraria</label>
+                        <select name="shift_type" class="form-select" required>
+                            <option value="Mattina">Mattina</option>
+                            <option value="Pomeriggio">Pomeriggio</option>
+                        </select>
+                    </div>
+                    <input type="hidden" id="lat" name="lat">
+                    <input type="hidden" id="lng" name="lng">
 
-                    <button type="submit" class="btn btn-primary w-100">Inserisci</button>
+                    <button type="submit" class="btn btn-primary w-100">Firma</button>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                document.getElementById('lat').value = position.coords.latitude;
+                document.getElementById('lng').value = position.coords.longitude;
+            }, function() {
+                alert("Impossibile ottenere la posizione. Consenti l'accesso alla posizione nel browser.");
+            });
+        } else {
+            alert("Il tuo browser non supporta la geolocalizzazione.");
+        }
+    </script>
 </x-layout>

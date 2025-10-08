@@ -1,4 +1,4 @@
-<div class="col-12 col-md-2 bg-yellow vh-100  p-3  ">
+<div class="col-12 col-md-2 bg-yellow sidebar  p-3  ">
     <a  class="text-decoration-none" href="{{ route('profile.show') }}">
         <p>Profilo</p>
     </a>

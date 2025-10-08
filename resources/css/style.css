@@ -18,3 +18,13 @@
 .height-custom{
   min-height: 60vh;
 }
+
+/* sidebar */
+.sidebar{
+ height:auto;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    height: 100vh; /* solo da md in su */
+  }
+}

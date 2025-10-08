@@ -12,12 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('shifts', function (Blueprint $table) {
+            // dati del lavoratore
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('surname');
+            // dati del turno
             $table->date('date'); //data della firma
             $table->integer('minutes'); // durata del turno in minuti (150=2h30, 180 = 3h)
+            $table -> string('shift_type');; // mattina o sera?
+
+            // coordinate
+            $table->decimal('latitude',10,7)->nullable();
+            $table->decimal('longitude',10,7)->nullable();
             $table->timestamps();
 
 
