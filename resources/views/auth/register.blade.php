@@ -13,15 +13,15 @@
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
                     </div>
                     <div class="mb-3">
                         <label for="surname" class="form-label">Cognome:</label>
-                        <input type="text" class="form-control" id="surname" name="surname">
+                        <input type="text" class="form-control" id="surname" name="surname" value="{{ old('surname') }}">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Indirizzo Email</label>
-                        <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" name="email">
+                        <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" name="email" value="{{ old('email') }}">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password:</label>
