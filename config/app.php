@@ -124,8 +124,8 @@ return [
     ],
 
     'office' =>[
-        'lat' => 41.15141994689981,       // Latitudine della sede
-        'lng' => 16.418997251513673,        // Longitudine della sede
+        'lat' => 41.152091084227614,       // Latitudine della sede
+        'lng' => 16.4120547119083,        // Longitudine della sede
         'max_distance_m' => 100,  // Raggio massimo in metri
         
     ]
