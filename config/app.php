@@ -122,12 +122,20 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-
-    'office' =>[
-        'lat' => 41.152091084227614,       // Latitudine della sede
-        'lng' => 16.4120547119083,        // Longitudine della sede
+    // piazza sedile
+    // 'office' =>[
+    //     'lat' => 41.152091084227614,       // Latitudine della sede
+    //     'lng' => 16.4120547119083,        // Longitudine della sede
+    //     'max_distance_m' => 100,  // Raggio massimo in metri
+        
+    // ]
+    // via gozzano
+     'office' =>[
+        'lat' => 41.1512797958257,       // Latitudine della sede
+        'lng' => 16.418935458794287,        // Longitudine della sede
         'max_distance_m' => 100,  // Raggio massimo in metri
         
     ]
+
 
 ];

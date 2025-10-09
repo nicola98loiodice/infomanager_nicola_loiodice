@@ -1,10 +1,12 @@
 <x-layout>
-    <div class="container mt-4">
-        <h2>Gestione turni mensili</h2>
+    <div class="container  mw-100">
+
         <div class="row">
-            <div class="col-12 col-md-10">
+            <x-sidebar />
+            <div class="col-12 col-md-10 mt-2">
+                <h2>Gestione turni mensili</h2>
                 {{-- Form per creare un turno --}}
-                <form action="{{ route('shifts.store') }}" method="POST" class="mb-4">
+                <form action="{{ route('admin.shifts.store') }}" method="POST" class="mb-4">
                     @csrf
                     <div class="row g-2">
                         <div class="col-md-3">
@@ -61,6 +63,17 @@
                                 <td>{{ $shift->minutes / 60 }} ore</td>
                                 <td>
                                     {{ $shift->is_signed ? '✅ Firmato' : '❌ In attesa' }}
+                                </td>
+                                <td>
+                                    <form action="{{ route('admin.shifts.destroy', $shift->id) }}" method="POST"
+                                        onsubmit="return confirm('Sei sicuro di voler eliminare questo turno?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm " title="Elimina">
+                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                        </button>
+
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

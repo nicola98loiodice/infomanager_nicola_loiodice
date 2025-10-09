@@ -11,7 +11,8 @@ class AdminShiftController extends Controller
     public function index()
     {
         $users = User::where('role', 'Operatore')->get();
-        $shifts = ScheduledShift::with('user')->get();
+        $shifts = ScheduledShift::with('user')->orderBy('date')->get();
+
         return view('admin.shifts.index', compact('users', 'shifts'));
     }
 
@@ -27,5 +28,12 @@ class AdminShiftController extends Controller
         ScheduledShift::create($request->only(['user_id', 'date', 'minutes', 'shift_type']));
 
         return redirect()->back()->with('success', 'Turno aggiunto con successo!');
+    }
+
+    public function destroy($id){
+        $shift = ScheduledShift::findOrFail($id);
+        $shift ->delete();
+
+        return redirect()->back();
     }
 }

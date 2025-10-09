@@ -36,22 +36,13 @@ class ShiftController extends Controller
                 'lat' => ['required', 'numeric'],
                 'lng' => ['required', 'numeric'],
             ],
-
-
             [
                 'minutes.in' => 'Seleziona un tipo di turno valido (150 o 180 minuti).',
-                'shift_type.in' => 'Seleziona una fascia oraria valida (Mattina o Pomeriggio).',
                 'shift_type.required' => 'Seleziona la fascia oraria.',
-                'shift_type.in' => 'La fascia oraria selezionata non è valida.',
                 'lat.required' => 'Posizione non rilevata. Attiva la geolocalizzazione.',
                 'lng.required' => 'Posizione non rilevata. Attiva la geolocalizzazione.',
             ]
         );
-
-        // Controllo che l’utente non abbia già firmato oggi
-        if (Shift::where('user_id', $user->id)->where('date', $today)->exists()) {
-            return redirect()->back()->with('error', 'Hai già firmato il turno di oggi.');
-        }
 
         // Controllo distanza dalla sede
         $officeLat = config('app.office.lat');
@@ -63,7 +54,15 @@ class ShiftController extends Controller
             return redirect()->back()->with('error', 'Non sei abbastanza vicino alla sede (max 100 metri).');
         }
 
-        // Creazione record nel DB
+        // Controllo che l’utente non abbia già firmato questo turno
+        if (Shift::where('user_id', $user->id)
+                ->where('date', $today)
+                ->where('shift_type', $request->shift_type)
+                ->exists()) {
+            return redirect()->back()->with('error', 'Hai già firmato questo turno.');
+        }
+
+        // Creazione record nella tabella "shifts"
         Shift::create([
             'user_id' => $user->id,
             'name' => $user->name,
@@ -75,13 +74,22 @@ class ShiftController extends Controller
             'longitude' => $request->lng,
         ]);
 
-        return redirect()->back()->with('success', 'Turno firmato con successo!');
-
-        ScheduledShift::where('user_id', $user->id)
+        // Aggiornamento scheduled_shift se esiste
+        $scheduled = ScheduledShift::where('user_id', $user->id)
             ->where('date', $today)
-            ->update(['is_signed' => true]);
+            ->where('shift_type', $request->shift_type)
+            ->first();
+
+        if ($scheduled) {
+            $scheduled->update(['is_signed' => true]);
+        }
+
+        return redirect()->back()->with('success', 'Turno firmato con successo!');
     }
-    // Funzione per calcolare la distanza in metri tra due punti GPS
+
+    /**
+     * Calcola la distanza in metri tra due punti GPS
+     */
     protected function distanceInMeters($lat1, $lng1, $lat2, $lng2): float
     {
         $earthRadius = 6371000; // metri

@@ -29,5 +29,6 @@ Route::middleware([IsAdmin::class])
     ->group(function () {
         Route::get('/shifts', [App\Http\Controllers\AdminShiftController::class, 'index'])->name('shifts.index');
         Route::post('/shifts', [App\Http\Controllers\AdminShiftController::class, 'store'])->name('shifts.store');
+        Route::delete('/shifts/{shift}', [AdminShiftController::class, 'destroy'])->name('shifts.destroy');
 
     });
