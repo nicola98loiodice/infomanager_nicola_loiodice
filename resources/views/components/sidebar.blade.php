@@ -11,8 +11,8 @@
         <p>Inserisci affluenza</p>
     </a>
     <hr>
-    <a class="text-decoration-none" href="">
-        <p>Calendario generale</p>
+    <a class="text-decoration-none" href="{{ route('shifts.index') }}">
+        <p>Calendario mensile</p>
     </a>
     <hr>
     @auth

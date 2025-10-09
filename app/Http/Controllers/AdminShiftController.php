@@ -10,7 +10,9 @@ class AdminShiftController extends Controller
 {
     public function index()
     {
-        $users = User::where('role', 'Operatore')->get();
+        // $users = User::where('role', 'Operatore')->get(); includiamo solo gli operatori se l'admin non deve selezionarsi e quindi non lavorare.
+        $users = User::all(); // Admin incluso
+
         $shifts = ScheduledShift::with('user')->orderBy('date')->get();
 
         return view('admin.shifts.index', compact('users', 'shifts'));

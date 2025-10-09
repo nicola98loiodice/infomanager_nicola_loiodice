@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ScheduledShift;
 use App\Models\Shift;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -103,5 +105,17 @@ class ShiftController extends Controller
         $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
 
         return $earthRadius * $c;
+    }
+
+    public function calendario()
+    {
+        $shifts = ScheduledShift::with('user')->orderBy('date')->get();
+        $shiftsByDate = $shifts->groupBy('date')->mapWithKeys(function ($item, $key) {
+            return [$key => [
+                'dayName' => Carbon::parse($key)->locale('it')->isoFormat('dddd'),
+                'shifts' => $item
+            ]];
+        });
+        return view('shifts.index', compact('shiftsByDate'));
     }
 }

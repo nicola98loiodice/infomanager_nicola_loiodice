@@ -8,8 +8,7 @@ use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicController::class, 'homepage'])->name('homepage');
-
-// rotta per la vista show
+// rotta per la vista show solo utenti registrati
 Route::middleware(['auth'])->group(function () {
     Route::get('/profilo', [UserController::class, 'show'])->name('profile.show');
 });
@@ -19,6 +18,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/firma-turno', [ShiftController::class, 'create'])->name('shifts.create');
     Route::post('/firma-turno', [ShiftController::class, 'store'])->name('shifts.store');
+    Route::get('/calendario',[ShiftController::class, 'calendario'])->name('shifts.index');
 });
 
 
