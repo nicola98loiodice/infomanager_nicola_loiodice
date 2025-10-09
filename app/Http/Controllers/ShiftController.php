@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ScheduledShift;
 use App\Models\Shift;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,6 +76,10 @@ class ShiftController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Turno firmato con successo!');
+
+        ScheduledShift::where('user_id', $user->id)
+            ->where('date', $today)
+            ->update(['is_signed' => true]);
     }
     // Funzione per calcolare la distanza in metri tra due punti GPS
     protected function distanceInMeters($lat1, $lng1, $lat2, $lng2): float
