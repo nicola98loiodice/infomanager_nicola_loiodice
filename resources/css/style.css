@@ -1,5 +1,6 @@
 :root {
-  --bg-blu: #246D9B;
+  /* --bg-blu: #2385c2; */
+  --bg-blu: #207ad5;
   --bg-yellow: #FFAB10;
   --white: #f8f9fa;
   --text-color: #212529;
@@ -27,4 +28,8 @@
   .sidebar {
     height: 100vh; /* solo da md in su */
   }
+}
+.bg-image{
+  background-image: url('https://scontent-fco2-1.xx.fbcdn.net/v/t39.30808-6/482011343_1228348172627195_1459024741320307306_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=tBgSSKrB-J0Q7kNvwFDL0Xn&_nc_oc=Adl9KBiZOymEDL1oCyfx0HAJNaHXcnq3GmAJaQcYflCShtJTyikCOEFIaw_KoKwFHTo&_nc_zt=23&_nc_ht=scontent-fco2-1.xx&_nc_gid=_1dzP_bd274nyFj4jhuzPg&oh=00_AfetQkGO8bbSPmRzpotFttg50tfnnN5mTz4ypirpFnx6ew&oe=68EE8454');
+  background-size: cover;
 }

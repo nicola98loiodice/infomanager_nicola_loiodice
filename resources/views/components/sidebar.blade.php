@@ -21,8 +21,8 @@
             <p>Inserisci turnazione</p>
         </a>
         <hr>
-        <a class="text-decoration-none" href="">
-            <p>Rivedi lista operatori</p>
+        <a class="text-decoration-none" href="{{ route('admin.users.index') }}">
+            <p>Lista operatori</p>
         </a>
     @endif
 @endauth

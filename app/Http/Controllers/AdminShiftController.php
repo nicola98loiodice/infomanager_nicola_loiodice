@@ -32,10 +32,29 @@ class AdminShiftController extends Controller
         return redirect()->back()->with('success', 'Turno aggiunto con successo!');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $shift = ScheduledShift::findOrFail($id);
-        $shift ->delete();
+        $shift->delete();
 
         return redirect()->back();
+    }
+
+
+    // pagina index operatori per admin
+    public function users()
+    {
+        // $users = User::where('role', 'Operatore')->get();
+        $users = User::all(); // Admin incluso
+        $totals = [];
+
+        foreach ($users as $user) {
+            $minutes = ScheduledShift::where('user_id', $user->id)
+                ->where('is_signed', true)
+                ->sum('minutes');
+
+            $totals[$user->id] = $minutes;
+        }
+        return view('admin.users.index', compact('users','totals'));
     }
 }
