@@ -7,7 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminShiftController extends Controller
+// Doveva essere solo un controller dedicato al controllo dei turni ma è diventato un mischione di roba. Trovi un po' di tutto di quello che può fare l'admin
 {
+    // funzione per indice dei turni
     public function index()
     {
         // $users = User::where('role', 'Operatore')->get(); includiamo solo gli operatori se l'admin non deve selezionarsi e quindi non lavorare.
@@ -17,7 +19,7 @@ class AdminShiftController extends Controller
 
         return view('admin.shifts.index', compact('users', 'shifts'));
     }
-
+    // funzione schedulazione turni
     public function store(Request $request)
     {
         $request->validate([
@@ -31,7 +33,7 @@ class AdminShiftController extends Controller
 
         return redirect()->back()->with('success', 'Turno aggiunto con successo!');
     }
-
+    // funzione per eliminare i turni schedulati per errore dall'admin
     public function destroy($id)
     {
         $shift = ScheduledShift::findOrFail($id);
@@ -52,6 +54,7 @@ class AdminShiftController extends Controller
         $users = User::all(); // Admin incluso
         $totals = [];
         $rangeTotals = [];
+        $hourlyRate = 10;
 
          foreach ($users as $user) {
         //ore complessive
@@ -64,7 +67,9 @@ class AdminShiftController extends Controller
             ->where('is_signed', true)
             ->whereBetween('date', [$start, $end])
             ->sum('minutes');
+        // calcolo paga per ore in range
+        $rangeTotalsInEuros[$user->id] = ($rangeTotals[$user->id] / 60) * $hourlyRate;
     }
-    return view('admin.users.index', compact('users', 'totals', 'start', 'end','rangeTotals'));
+    return view('admin.users.index', compact('users', 'totals', 'start', 'end','rangeTotals','rangeTotalsInEuros','hourlyRate'));
     }
 }

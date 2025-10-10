@@ -10,8 +10,9 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Ruolo</th>
-                            <th>Ore totali</th>
+                            <th>Tot.Ore</th>
                             <th>Range</th>
+                            <th>€/Ore range</th>
                             <form method="GET" action="{{ route('admin.users.index') }}" class="mb-3">
                                 <div class="row g-2">
                                     <div class="col-md-3">
@@ -40,13 +41,26 @@
                                     {{ isset($totals[$user->id]) ? number_format($totals[$user->id] / 60, 1) : 0 }} h
                                 </td>
                                 <td>
-                                    {{ isset($rangeTotals[$user->id]) ? number_format($rangeTotals[$user->id] / 60, 1) : 0 }} h
+                                    {{ isset($rangeTotals[$user->id]) ? number_format($rangeTotals[$user->id] / 60, 1) : 0 }}
+                                    h
 
+                                </td>
+                                <td>
+                                    @if (isset($rangeTotalsInEuros[$user->id]))
+                                        €{{ number_format($rangeTotalsInEuros[$user->id], 2) }}
+                                        <small class="text-muted">
+                                            ({{ $hourlyRate }}€/h)
+                                        </small>
+                                    @else
+                                        €0.00
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                <hr>
+                
             </div>
         </div>
 

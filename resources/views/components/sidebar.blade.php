@@ -7,10 +7,10 @@
         <p>Firma turno</p>
     </a>
     <hr>
-    <a class="text-decoration-none" href="">
+    {{-- <a class="text-decoration-none" href="">
         <p>Inserisci affluenza</p>
     </a>
-    <hr>
+    <hr> --}}
     <a class="text-decoration-none" href="{{ route('shifts.index') }}">
         <p>Calendario mensile</p>
     </a>
