@@ -2,7 +2,7 @@
     <div class="container mw-100 ">
         <div class="row justify-content-between flex-row  ">
             <x-sidebar />
-            <div class="col-12 col-md-10 mt-2   ">
+            <div class="col-12 col-md-10 mt-2 table-responsive  ">
                 <h2>Profilo Utente</h2>
                 <div class="mt-4 p-3 ">
                     <p><strong>Nome:</strong> {{ $user->name }}</p>
@@ -11,7 +11,7 @@
                     {{-- <p><strong>Ruolo:</strong> {{ ucfirst($user->role) }}</p> --}}
                     <p><strong>Ore Totali Svolte:</strong> {{ $totaleOre }}</p>
                     <p><strong>Recap turni:</strong>
-                    <table class="table">
+                    <table class="table ">
                         <thead>
                             <tr>
                                 <th>Data</th>

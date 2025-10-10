@@ -3,7 +3,7 @@
 
         <div class="row">
             <x-sidebar />
-            <div class="col-12 col-md-10 mt-2">
+            <div class="col-12 col-md-10 mt-2 table-responsive" >
                 <h2>Gestione turni mensili</h2>
                 {{-- Form per creare un turno --}}
                 <form action="{{ route('admin.shifts.store') }}" method="POST" class="mb-4">

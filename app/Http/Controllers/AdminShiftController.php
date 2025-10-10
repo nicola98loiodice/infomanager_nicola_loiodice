@@ -42,19 +42,29 @@ class AdminShiftController extends Controller
 
 
     // pagina index operatori per admin
-    public function users()
+    public function users(Request $request)
     {
+
+        $start = $request->input('start_date', now()->startOfMonth()->toDateString());
+        $end = $request->input('end_date', now()->endOfMonth()->toDateString());
+
         // $users = User::where('role', 'Operatore')->get();
         $users = User::all(); // Admin incluso
         $totals = [];
+        $rangeTotals = [];
 
-        foreach ($users as $user) {
-            $minutes = ScheduledShift::where('user_id', $user->id)
-                ->where('is_signed', true)
-                ->sum('minutes');
+         foreach ($users as $user) {
+        //ore complessive
+        $totals[$user->id] = ScheduledShift::where('user_id', $user->id)
+            ->where('is_signed', true)
+            ->sum('minutes');
 
-            $totals[$user->id] = $minutes;
-        }
-        return view('admin.users.index', compact('users','totals'));
+        //ore filtrate dal range impostato nel form
+        $rangeTotals[$user->id] = ScheduledShift::where('user_id', $user->id)
+            ->where('is_signed', true)
+            ->whereBetween('date', [$start, $end])
+            ->sum('minutes');
+    }
+    return view('admin.users.index', compact('users', 'totals', 'start', 'end','rangeTotals'));
     }
 }
