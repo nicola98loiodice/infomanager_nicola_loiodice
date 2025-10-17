@@ -10,4 +10,5 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    // per fare test da cellulare incollare snippet di codice giusto. 
 });
