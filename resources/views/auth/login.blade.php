@@ -7,6 +7,15 @@
                 </h1>
             </div>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <div class="row justify-content-center align-items-center height-custom">
             <div class="col-12 col-md-6">
@@ -14,7 +23,8 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Indirizzo Email</label>
-                        <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" name="email">
+                        <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp"
+                            name="email">
                     </div>
 
                     <div class="mb-3">
