@@ -51,7 +51,8 @@ class AdminShiftController extends Controller
         $end = $request->input('end_date', now()->endOfMonth()->toDateString());
 
         // $users = User::where('role', 'Operatore')->get();
-        $users = User::all(); // Admin incluso
+        // $users = User::all(); // Admin incluso
+        $users = User::orderBy('created_at', 'desc')->get(); // mette gli utenti in ordine di iscrizione
         $totals = [];
         $rangeTotals = [];
         $hourlyRate = 10;

@@ -2,7 +2,7 @@
     <div class="container-fluid text-center bg-body-tertiary">
         <div class="row vh-100 justify-content-center align-items-center bg-image ">
             <div class="col-12">
-                <h1 class="display-4">InfoPoint-manager</h1>
+                <h1 class="display-4">InfoPoint-Shiftsmanager</h1>
             </div>
             @auth
             <div class="col-12  ">
