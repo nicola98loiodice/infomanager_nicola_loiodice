@@ -34,3 +34,14 @@ Route::middleware([IsAdmin::class])
 
 
     });
+
+
+
+// Blocca completamente la registrazione gestita da Fortify
+Route::get('/register', function () {
+    abort(404);
+})->name('register')->middleware('guest');
+
+Route::post('/register', function () {
+    abort(404);
+})->middleware('guest');

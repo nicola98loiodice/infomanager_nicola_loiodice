@@ -27,18 +27,44 @@
                             name="email">
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password:</label>
                         <input type="password" class="form-control" id="password" name="password">
+                    </div> --}}
+                    <div class="mb-3 position-relative">
+                        <label for="password" class="form-label">Password</label>
+                        <input id="password" type="password" name="password" class="form-control" required>
+
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-2 mt-3" style="cursor:pointer;"
+                            onclick="togglePassword()">
+                            <i id="eyeIcon" class="bi bi-eye-fill"></i> {{-- Bootstrap icon --}}
+                        </span>
                     </div>
 
-                    <div class="mb-3">
+
+                    {{-- <div class="mb-3">
                         <a href="{{ route('register') }}">Non ho un account</a>
-                    </div>
+                    </div> --}}
 
                     <button type="submit" class="btn btn-primary">Accedi</button>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+function togglePassword() {
+    const passwordField = document.getElementById("password");
+    const eyeIcon = document.getElementById("eyeIcon");
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        eyeIcon.classList.remove("bi-eye-fill");
+        eyeIcon.classList.add("bi-eye-slash-fill");
+    } else {
+        passwordField.type = "password";
+        eyeIcon.classList.remove("bi-eye-slash-fill");
+        eyeIcon.classList.add("bi-eye-fill");
+    }
+}
+</script>
 </x-layout>
